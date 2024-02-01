@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +21,27 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+
+
+//route group
+
+Route::prefix('admin')->group(function(){
+    //untuk halaman admin
+    Route::get('halamanadmin', function () {
+        return "<H1>INI UNTUK ADMIN</H1>";
+    });
+    Route::get('jurusan', [\App\Http\Controllers\JurusanController::class, 'index'])->name('jurusan.index');
+});
+
+Route::prefix('user')->group(function(){
+    //untuk halaman user
+    Route::get('halamanuser', function () {
+        return "<H1>INI UNTUK USER</H1>";
+    });
+
+});
